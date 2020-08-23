@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity } from '
 
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
+import AddTodo from './components/AddTodo';
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -17,11 +18,17 @@ export default function App() {
     });
   };
 
+  const submitHandler = (text) => {
+    setTodos((prevState) => {
+      return [...prevState, { text, key: Math.random().toString() }];
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        {/* to form */}
+        <AddTodo submitHandler={submitHandler} />
         <View style={styles.list}>
           <FlatList
             data={todos}
